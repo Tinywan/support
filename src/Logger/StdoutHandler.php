@@ -2,7 +2,6 @@
 
 /**
  * @desc Logger.php 描述信息
- * @author Tinywan(ShaoBo Wan)
  * @date 2022/3/17 9:35
  */
 declare(strict_types=1);
@@ -23,9 +22,8 @@ class StdoutHandler extends AbstractProcessingHandler
 
     /**
      * StdoutHandler constructor.
+     *
      * @param int $level
-     * @param bool $bubble
-     * @param OutputInterface|null $output
      */
     public function __construct($level = Logger::DEBUG, bool $bubble = true, ?OutputInterface $output = null)
     {
@@ -36,7 +34,6 @@ class StdoutHandler extends AbstractProcessingHandler
 
     /**
      * @desc: Writes the record down to the log of the implementing handler.
-     * @param array $record
      */
     protected function write(array $record): void
     {

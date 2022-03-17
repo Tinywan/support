@@ -1,7 +1,6 @@
 <?php
 /**
  * @desc Logger.php 描述信息
- * @author Tinywan(ShaoBo Wan)
  * @date 2022/3/17 9:35
  */
 declare(strict_types=1);
@@ -46,7 +45,6 @@ class Logger
 
     /**
      * Logger constructor.
-     * @param array $config
      */
     public function __construct(array $config = [])
     {
@@ -55,8 +53,7 @@ class Logger
 
     /**
      * @desc: 方法描述
-     * @param string $method
-     * @param array $args
+     *
      * @throws Exception
      */
     public function __call(string $method, array $args): void
@@ -86,7 +83,6 @@ class Logger
 
     /**
      * @desc: 方法描述
-     * @return BaseLogger
      */
     public function createLogger(): BaseLogger
     {

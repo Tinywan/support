@@ -10,6 +10,17 @@ handle with array/log/config/guzzle/function
 
 # Other
 
+composer
 ```
 composer dumpautoload
+```
+
+phpstan
+```php
+vendor/bin/phpstan analyse src
+```
+
+php-cs-fixer
+```php
+vendor/bin/php-cs-fixer fix src
 ```
