@@ -1,9 +1,9 @@
 <?php
 /**
  * @desc Functions.php 描述信息
- * @date 2022/3/17 9:51
+ * @author Tinywan(ShaoBo Wan)
+ * @date 2022/3/24 14:10
  */
-
 declare(strict_types=1);
 
 namespace Tinywan\Support;

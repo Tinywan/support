@@ -2,6 +2,7 @@
     "name": "tinywan/support",
     "description": "common components",
     "keywords": ["support", "array", "collection", "config"],
+    "license": "MIT",
     "support": {
         "issues": "https://github.com/tinywan/support/issues",
         "source": "https://github.com/tinywan/support"
@@ -21,29 +22,25 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^1.1.0",
         "symfony/console": "^5.1",
-        "monolog/monolog": "^2.0"
+        "monolog/monolog": "^2.0",
+        "vimeo/psalm": "^4.22"
     },
     "autoload": {
-        "files": [
-            "src/Functions.php"
-        ],
         "psr-4": {
             "Tinywan\\Support\\": "src/"
-        }
+        },
+        "files": [
+            "src/Functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tinywan\\Support\\Tests\\": "tests/"
         }
     },
-    "suggest": {
-        "symfony/console": "Use stdout logger",
-        "monolog/monolog": "Use logger"
-    },
     "scripts": {
         "test": "./vendor/bin/phpunit -c phpunit.xml --colors=always",
         "cs-fix": "php-cs-fixer fix --dry-run --diff 1>&2",
         "analyse": "phpstan analyse --memory-limit 300M -l 5 -c phpstan.neon ./src"
-    },
-    "license": "MIT"
+    }
 }

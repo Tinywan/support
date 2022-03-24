@@ -24,3 +24,9 @@ php-cs-fixer
 ```php
 vendor/bin/php-cs-fixer fix src
 ```
+
+vimeo/psalm
+```php
+./vendor/bin/psalm --show-info=true
+```
+> https://github.com/vimeo/psalm

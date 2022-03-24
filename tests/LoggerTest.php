@@ -5,21 +5,22 @@
  * @date 2022/3/17 9:41
  */
 
-declare(strict_types=1);
-
-namespace Tinywan\Support\Tests;
+namespace Tinywan\Supports\Tests;
 
 use Monolog\Formatter\FormatterInterface;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\AbstractHandler;
+use Psr\Log\LoggerInterface;
 use Tinywan\Support\Logger;
 
 class LoggerTest extends \PHPUnit\Framework\TestCase
 {
-    private $logger;
+    private Logger $logger;
 
     protected function setUp(): void
     {
         $this->logger = new Logger();
-        $this->logger->setConfig(['file' => './test.log']);
+        $this->logger->setConfig(['file' => './tinywan.log']);
     }
 
     public function testGetFormatter()
@@ -27,14 +28,24 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
         self::assertInstanceOf(FormatterInterface::class, $this->logger->getFormatter());
     }
 
-    public function testSetFormatter()
+    public function testCreateFormatter()
     {
-        self::assertInstanceOf($this->logger->debug('test debug', ['foo' => 'bar']));
+        self::assertInstanceOf(FormatterInterface::class, $this->logger->createFormatter());
+    }
+
+    public function testGetHandler()
+    {
+        self::assertInstanceOf(AbstractHandler::class, $this->logger->getHandler());
+    }
+
+    public function testGetLogger()
+    {
+        self::assertInstanceOf(LoggerInterface::class, $this->logger->getLogger());
     }
 
     public function testDebug()
     {
-        self::assertNull($this->logger->debug('test debug', ['foo' => 'bar']));
+        self::assertNull($this->logger->debug('【福建省】获取培训原始解密数据', ['foo' => 'bar']));
     }
 
     public function testInfo()

@@ -1,7 +1,8 @@
 <?php
 /**
  * @desc Logger.php 描述信息
- * @date 2022/3/17 9:35
+ * @author Tinywan(ShaoBo Wan)
+ * @date 2022/3/24 14:10
  */
 declare(strict_types=1);
 
@@ -13,10 +14,12 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
-use Monolog\Logger as BaseLogger;
+use Monolog\Logger as KernelLogger;
 use Psr\Log\LoggerInterface;
 
 /**
+ * Class Logger.
+ *
  * @method static void emergency($message, array $context = [])
  * @method static void alert($message, array $context = [])
  * @method static void critical($message, array $context = [])
@@ -38,7 +41,7 @@ class Logger
     protected array $config = [
         'file' => null,
         'identify' => 'default',
-        'level' => BaseLogger::DEBUG,
+        'level' => KernelLogger::DEBUG,
         'type' => 'daily',
         'max_files' => 30,
     ];
@@ -48,11 +51,12 @@ class Logger
      */
     public function __construct(array $config = [])
     {
+        // 初始化配置文件
         $this->setConfig($config);
     }
 
     /**
-     * @desc: 方法描述
+     * @desc: $this->logger->debug
      *
      * @throws Exception
      */
@@ -84,14 +88,17 @@ class Logger
     /**
      * @desc: 方法描述
      */
-    public function createLogger(): BaseLogger
+    public function createLogger(): KernelLogger
     {
         $handler = $this->getHandler();
 
         $handler->setFormatter($this->getFormatter());
 
-        $logger = new BaseLogger($this->config['identify']);
+        // 创建日志频道 new Logger('tinywan');
+        $logger = new KernelLogger($this->config['identify']);
 
+        // 添加handler
+        // $log->pushHandler(new StreamHandler('path/to/your.log', Logger::WARNING));
         $logger->pushHandler($handler);
 
         return $logger;
@@ -123,9 +130,9 @@ class Logger
     public function createFormatter(): LineFormatter
     {
         return new LineFormatter(
-            "%datetime% > %channel%.%level_name% > %message% %context% %extra%\n\n",
-            null,
-            false,
+            "[%datetime%][%level_name%] %message% %context% %extra%\n\n",
+            'Y-m-d H:i:s',
+            true,
             true
         );
     }
@@ -147,8 +154,15 @@ class Logger
         return $this->handler ??= $this->createHandler();
     }
 
+    /**
+     * @desc: 创建 handler 日志管理器
+     * 函数：sys_get_temp_dir — 返回用于临时文件的目录
+     *
+     * @author Tinywan(ShaoBo Wan)
+     */
     public function createHandler(): AbstractProcessingHandler
     {
+        // 获取日志文件路径
         $file = $this->config['file'] ?? sys_get_temp_dir().'/logs/'.$this->config['identify'].'.log';
 
         if ('single' === $this->config['type']) {

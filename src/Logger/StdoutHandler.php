@@ -1,8 +1,8 @@
 <?php
-
 /**
- * @desc Logger.php 描述信息
- * @date 2022/3/17 9:35
+ * @desc StdoutHandler.php 描述信息
+ * @author Tinywan(ShaoBo Wan)
+ * @date 2022/3/24 14:10
  */
 declare(strict_types=1);
 
@@ -22,10 +22,11 @@ class StdoutHandler extends AbstractProcessingHandler
 
     /**
      * StdoutHandler constructor.
-     *
      * @param int $level
+     * @param bool $bubble
+     * @param OutputInterface|null $output
      */
-    public function __construct($level = Logger::DEBUG, bool $bubble = true, ?OutputInterface $output = null)
+    public function __construct(int $level = Logger::DEBUG, bool $bubble = true, ?OutputInterface $output = null)
     {
         $this->output = $output ?? new ConsoleOutput();
 
