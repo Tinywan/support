@@ -116,13 +116,14 @@ class Str
     }
 
     /**
-     * @desc: IP转换为地址  39.170.63.237 => 浙江省杭州市西湖区 移动
+     * @desc: IP转换为地址
+     * eg：39.170.63.237 => 浙江省杭州市西湖区 移动
      * @param string $ip
      * @return string
      * @throws Exception
      * @author Tinywan(ShaoBo Wan)
      */
-    function ipToAddress(string $ip): string
+    public static function ipToAddress(string $ip): string
     {
         $ip2region = new \Ip2Region();
         $ipInfo = $ip2region->btreeSearch($ip);
